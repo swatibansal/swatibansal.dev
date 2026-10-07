@@ -71,3 +71,29 @@ dialog.addEventListener('cancel',e=>{e.preventDefault();closeCase();});
 dialog.addEventListener('click',e=>{const r=dialog.getBoundingClientRect();if(e.target===dialog&&(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom))closeCase();});
 window.addEventListener('hashchange',routeCase);routeCase();
 document.querySelector('#year').textContent = new Date().getFullYear();
+
+// Keep the skip link within the current routed view.
+document.querySelector('.skip').addEventListener('click', event => {
+ event.preventDefault();
+ const main = document.querySelector('#main');
+ main.setAttribute('tabindex', '-1');
+ main.focus({preventScroll: true});
+ main.scrollIntoView({block: 'start', behavior: 'instant'});
+});
+function closeMenu(restoreFocus = false) {
+ menu.setAttribute('aria-expanded', 'false');
+ navigation.classList.remove('open');
+ if (restoreFocus) menu.focus();
+}
+document.addEventListener('keydown', event => {
+ if (event.key === 'Escape' && menu.getAttribute('aria-expanded') === 'true') {
+  closeMenu(true);
+ }
+});
+document.addEventListener('click', event => {
+ if (!event.target.closest('.header')) closeMenu();
+});
+window.addEventListener('hashchange', () => closeMenu());
+window.matchMedia('(min-width: 901px)').addEventListener('change', event => {
+ if (event.matches) closeMenu();
+});
