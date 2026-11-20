@@ -97,3 +97,19 @@ window.addEventListener('hashchange', () => closeMenu());
 window.matchMedia('(min-width: 901px)').addEventListener('change', event => {
  if (event.matches) closeMenu();
 });
+
+// Confluent Current conference-photo popup
+(() => {
+  const open = document.querySelector('.current-speaking-photo');
+  const modal = document.getElementById('speaker-photo-dialog');
+  const close = modal?.querySelector('.speaker-photo-close');
+  if (!open || !modal || !close) return;
+  open.addEventListener('click', () => {
+    if (!modal.open) modal.showModal();
+  });
+  close.addEventListener('click', () => modal.close());
+  // Clicking outside the dialog content closes the popup; Escape works natively.
+  modal.addEventListener('click', event => {
+    if (event.target === modal) modal.close();
+  });
+})();
