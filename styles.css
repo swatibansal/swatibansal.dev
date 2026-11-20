@@ -90,3 +90,14 @@ dialog { max-height: 88vh; max-height: 88dvh; overscroll-behavior: contain; }
   .branch { grid-template-columns: minmax(0, 1fr); }
   .actions { gap: 18px; }
 }
+
+/* Confluent Current 2026 speaking feature */
+.current-speaking-photo{display:block;margin-bottom:16px;border:1px solid var(--line);border-radius:9px;overflow:hidden;background:#101a2b}
+.current-speaking-photo img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;object-position:center}
+.current-speaking-body{min-width:0}
+.current-speaking .entry-meta{line-height:1.8}
+.current-speaking .speaking-links{display:flex;gap:12px 22px;flex-wrap:wrap;margin-top:14px}
+.current-speaking .speaking-links a,.conference-note a{color:var(--cyan)}
+.conference-note{font-size:13px!important;margin-top:16px;color:var(--muted)!important}
+.current-speaking .speaking-links a:hover,.conference-note a:hover{text-decoration:underline}
+@media (max-width:720px){.current-speaking-photo img{aspect-ratio:4/3}}
